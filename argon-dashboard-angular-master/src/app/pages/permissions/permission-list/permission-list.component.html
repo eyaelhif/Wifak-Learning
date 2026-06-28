@@ -1,0 +1,59 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0 d-flex align-items-center justify-content-between">
+          <div>
+            <h3 class="mb-0">Permissions</h3>
+            <small class="text-muted">Create and maintain permission codes returned by the backend.</small>
+          </div>
+          <a class="btn btn-sm btn-primary" routerLink="/permissions/new">
+            <i class="ni ni-fat-add"></i>
+            New permission
+          </a>
+        </div>
+
+        <div class="px-4" *ngIf="message || error">
+          <div class="alert alert-success" *ngIf="message">{{ message }}</div>
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col" class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loading">
+                <td colspan="3" class="text-center py-5">Loading permissions...</td>
+              </tr>
+              <tr *ngIf="!loading && permissions.length === 0">
+                <td colspan="3" class="text-center py-5">No permissions found.</td>
+              </tr>
+              <tr *ngFor="let permission of permissions">
+                <th scope="row">{{ permission.name }}</th>
+                <td>{{ permission.description }}</td>
+                <td class="text-right">
+                  <a class="btn btn-sm btn-neutral" [routerLink]="['/permissions', permission.id, 'edit']">Edit</a>
+                  <button class="btn btn-sm btn-danger" type="button" (click)="deletePermission(permission)" [disabled]="loading">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

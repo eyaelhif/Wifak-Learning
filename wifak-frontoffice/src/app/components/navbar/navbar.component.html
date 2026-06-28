@@ -1,0 +1,52 @@
+<header class="navbar-wrapper">
+  <div class="navbar">
+
+    <!-- Logo -->
+    <a routerLink="/frontoffice/home" class="logo-group">
+  <div class="logo-icon">
+    <img src="assets/images/logowifak.png" alt="Wifak Learning" />
+  </div>
+  <div class="logo-text">
+    <div class="logo-name">Wifak Learning</div>
+    <div class="logo-tagline">KNOWLEDGE. REFINED.</div>
+  </div>
+</a>
+
+    <!-- Nav links -->
+    <nav class="nav-links">
+      <a *ngFor="let item of navItems"
+        [routerLink]="item.path"
+        class="nav-item"
+        [class.active]="isActive(item.path)">
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    </nav>
+
+    <!-- Right side -->
+    <div class="nav-right">
+
+      <!-- Search -->
+      <div class="search-pill">
+        <span>🔍</span>
+        <span class="search-placeholder">Search courses, skills…</span>
+        <kbd class="search-kbd">⌘K</kbd>
+      </div>
+
+      <!-- Streak -->
+      <div class="streak-pill">
+        <span class="flame">🔥</span>
+        <span>12 days</span>
+      </div>
+
+      <!-- Bell -->
+      <button class="icon-btn">🔔</button>
+
+      <button class="icon-btn" type="button" title="Backoffice" (click)="openBackoffice()">BO</button>
+
+      <button class="user-avatar" type="button" title="Logout" (click)="logout()">
+        {{ (currentUser?.fullName || 'WL').slice(0, 2).toUpperCase() }}
+      </button>
+
+    </div>
+  </div>
+</header>

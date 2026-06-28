@@ -1,0 +1,125 @@
+<div class="ai-page">
+  <section class="ai-header">
+    <div>
+      <div class="section-label">AI COURSE INTELLIGENCE</div>
+      <h1>Analyse OCR intelligente</h1>
+      <p>
+        Depose un cours PDF ou une image pour generer automatiquement resume, chapitres, flashcards, quiz et recherche semantique.
+      </p>
+    </div>
+    <div class="status-panel">
+      <span class="status-dot"></span>
+      <div>
+        <strong>FastAPI OCR</strong>
+        <small>http://127.0.0.1:8001</small>
+      </div>
+    </div>
+  </section>
+
+  <div *ngIf="error" class="error-box">{{ error }}</div>
+
+  <section *ngIf="loading" class="loading-state">
+    <div class="loader"></div>
+    <div>
+      <strong>Lecture et comprehension du document</strong>
+      <p>Conversion PDF, pretraitement image, OCR, extraction pedagogique et generation IA.</p>
+    </div>
+  </section>
+
+  <ng-container *ngIf="analysis">
+    <section class="summary-grid">
+      <article class="summary-main">
+        <div class="summary-meta">
+          <span>{{ analysis.language | uppercase }}</span>
+          <span>{{ analysis.confidence }}% OCR</span>
+          <span>{{ analysis.metadata['pages'] || 1 }} page(s)</span>
+        </div>
+        <h2>{{ analysis.title }}</h2>
+        <p>{{ analysis.short_summary }}</p>
+      </article>
+
+      <article class="summary-side">
+        <h3>Mots-cles</h3>
+        <div class="keyword-list">
+          <span *ngFor="let keyword of analysis.keywords">{{ keyword }}</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="smart-tools">
+      <div class="tool-box">
+        <h3>Recherche semantique</h3>
+        <div class="inline-form">
+          <input [(ngModel)]="searchQuery" placeholder="Ex: risque, conformite, KYC..." />
+          <button type="button" [disabled]="searching" (click)="search()">{{ searching ? '...' : 'Chercher' }}</button>
+        </div>
+        <div *ngIf="searchResponse" class="result-list">
+          <p *ngFor="let result of searchResponse.results">{{ result.content }}</p>
+        </div>
+      </div>
+
+      <div class="tool-box">
+        <h3>Question au cours</h3>
+        <div class="inline-form">
+          <input [(ngModel)]="question" placeholder="Pose une question sur ce document..." />
+          <button type="button" [disabled]="asking" (click)="ask()">{{ asking ? '...' : 'Demander' }}</button>
+        </div>
+        <div *ngIf="askResponse" class="answer-box">
+          {{ askResponse.answer }}
+        </div>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button type="button" [class.active]="activeTab === 'chapters'" (click)="activeTab = 'chapters'">Chapitres</button>
+      <button type="button" [class.active]="activeTab === 'flashcards'" (click)="activeTab = 'flashcards'">Flashcards</button>
+      <button type="button" [class.active]="activeTab === 'quiz'" (click)="activeTab = 'quiz'">Quiz</button>
+      <button type="button" [class.active]="activeTab === 'content'" (click)="activeTab = 'content'">Contenu</button>
+    </nav>
+
+    <section class="tab-panel" *ngIf="activeTab === 'chapters'">
+      <article class="chapter-card" *ngFor="let chapter of analysis.chapters">
+        <div class="chapter-order">{{ chapter.order }}</div>
+        <div>
+          <h3>{{ chapter.title }}</h3>
+          <p>{{ chapter.summary || chapter.content }}</p>
+          <ul *ngIf="chapter.important_points.length">
+            <li *ngFor="let point of chapter.important_points">{{ point }}</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="cards-grid" *ngIf="activeTab === 'flashcards'">
+      <article class="flashcard" *ngFor="let card of analysis.flashcards">
+        <strong>{{ card.question }}</strong>
+        <p>{{ card.answer }}</p>
+      </article>
+    </section>
+
+    <section class="quiz-list" *ngIf="activeTab === 'quiz'">
+      <article class="quiz-card" *ngFor="let item of analysis.quiz; let i = index; trackBy: trackByIndex">
+        <h3>{{ i + 1 }}. {{ item.question }}</h3>
+        <div class="quiz-options">
+          <button
+            type="button"
+            *ngFor="let option of item.options"
+            [class.selected]="selectedAnswers[i] === option"
+            [class.correct]="selectedAnswers[i] && isCorrect(i, option)"
+            [class.wrong]="selectedAnswers[i] === option && !isCorrect(i, option)"
+            (click)="chooseAnswer(i, option)">
+            {{ option }}
+          </button>
+        </div>
+        <p *ngIf="selectedAnswers[i]" class="explanation">{{ item.explanation }}</p>
+      </article>
+    </section>
+
+    <section class="content-grid" *ngIf="activeTab === 'content'">
+      <article class="content-block" *ngFor="let block of analysis.structured_content.slice(0, 80)">
+        <span>{{ block.type }}</span>
+        <p>{{ block.content }}</p>
+      </article>
+    </section>
+  </ng-container>
+</div>

@@ -1,0 +1,310 @@
+.page-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// ── Header ──
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  @media(min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #888;
+  font-weight: 600;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0F1C3F;
+  margin-top: 0.5rem;
+  @media(min-width: 768px) { font-size: 4rem; }
+}
+
+.text-gold {
+  background: linear-gradient(90deg, #D4A843, #f5d078);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-subtitle {
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  min-width: 300px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 0.875rem;
+  color: #0F1C3F;
+  &::placeholder { color: #aaa; }
+}
+
+// ── Categories ──
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.cat-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  background: white;
+  color: #0F1C3F;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover { border-color: #D4A843; color: #D4A843; }
+  &.active {
+    background: linear-gradient(135deg, #0F1C3F, #1e2f6b);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(15,28,63,0.3);
+  }
+}
+
+// ── Featured ──
+.featured-card {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  min-height: 300px;
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.featured-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0F1C3F 0%, #2d1b4e 60%, #6b1f3a 100%);
+}
+
+.featured-glow {
+  position: absolute;
+  right: 0; top: 0;
+  width: 50%; height: 100%;
+  background: radial-gradient(ellipse at right, #D4A843, transparent 70%);
+  opacity: 0.3;
+  filter: blur(30px);
+}
+
+.featured-content { position: relative; max-width: 600px; }
+
+.featured-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #D4A843;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(212,168,67,0.4);
+}
+
+.featured-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin-top: 1rem;
+  line-height: 1.2;
+}
+
+.featured-desc {
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.featured-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.enroll-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background: white;
+  color: #0F1C3F;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212,168,67,0.4); }
+}
+
+.featured-meta { color: rgba(255,255,255,0.6); font-size: 0.875rem; }
+
+// ── Course Grid ──
+.courses-grid {
+  display: grid;
+  gap: 1.5rem;
+  @media(min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  @media(min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.course-card {
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+}
+
+.course-thumb {
+  height: 140px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.course-difficulty {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  border: 1.5px solid;
+  background: rgba(0,0,0,0.3);
+}
+
+.course-rating {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0,0,0,0.3);
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.course-body { padding: 1.25rem; }
+
+.course-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #D4A843;
+  text-transform: uppercase;
+}
+
+.course-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F1C3F;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.course-instructor {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+.course-meta {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+}
+
+.course-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 5px;
+  border-radius: 9999px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #D4A843, #f5d078);
+  transition: width 1s ease;
+}
+
+.progress-pct {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #D4A843;
+}
+
+.course-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #0F1C3F;
+  color: white;
+  &:hover { opacity: 0.9; transform: scale(1.02); }
+  &.continue {
+    background: linear-gradient(135deg, #D4A843, #f5d078);
+    color: #0F1C3F;
+  }
+  &.done {
+    background: #f0fdf4;
+    color: #22c55e;
+    border: 1.5px solid #22c55e;
+  }
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  font-size: 1rem;
+}

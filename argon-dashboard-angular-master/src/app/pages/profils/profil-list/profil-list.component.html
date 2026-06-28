@@ -1,0 +1,64 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0 d-flex align-items-center justify-content-between">
+          <div>
+            <h3 class="mb-0">Profiles</h3>
+            <small class="text-muted">Profiles group permissions and are assigned to users.</small>
+          </div>
+          <a class="btn btn-sm btn-primary" routerLink="/profils/new">
+            <i class="ni ni-fat-add"></i>
+            New profile
+          </a>
+        </div>
+
+        <div class="px-4" *ngIf="message || error">
+          <div class="alert alert-success" *ngIf="message">{{ message }}</div>
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Permissions</th>
+                <th scope="col" class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loading">
+                <td colspan="3" class="text-center py-5">Loading profiles...</td>
+              </tr>
+              <tr *ngIf="!loading && profils.length === 0">
+                <td colspan="3" class="text-center py-5">No profiles found.</td>
+              </tr>
+              <tr *ngFor="let profil of profils">
+                <th scope="row">{{ profil.name }}</th>
+                <td>
+                  <span class="badge badge-primary mr-1 mb-1" *ngFor="let permission of profil.permissions">
+                    {{ permission }}
+                  </span>
+                </td>
+                <td class="text-right">
+                  <a class="btn btn-sm btn-neutral" [routerLink]="['/profils', profil.id, 'edit']">Edit</a>
+                  <a class="btn btn-sm btn-info" [routerLink]="['/profils', profil.id, 'permissions']">Permissions</a>
+                  <button class="btn btn-sm btn-danger" type="button" (click)="deleteProfil(profil)" [disabled]="loading">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

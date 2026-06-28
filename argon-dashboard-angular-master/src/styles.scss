@@ -1,0 +1,377 @@
+/* Wifak Bloom inspired backoffice surface */
+:root {
+  --wifak-navy: #1b2b5e;
+  --wifak-crimson: #c0392b;
+  --wifak-gold: #c9a84c;
+  --wifak-warm: #f5f4f0;
+  --wifak-stone: #eeece8;
+  --wifak-border: #e5e1d8;
+  --wifak-ink: #171b2a;
+  --wifak-muted: #777985;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 0 0, rgba(192, 57, 43, .05), transparent 44%),
+    radial-gradient(ellipse at 100% 100%, rgba(27, 43, 94, .06), transparent 48%),
+    var(--wifak-warm);
+  color: var(--wifak-ink);
+}
+
+.main-content {
+  background: transparent !important;
+}
+
+.card,
+.table-container,
+.modal-content {
+  border: 1px solid var(--wifak-border) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.card-header,
+.card-footer {
+  background: #fff !important;
+  border-color: var(--wifak-border) !important;
+}
+
+.card .table,
+.table {
+  color: var(--wifak-ink);
+}
+
+.table thead th {
+  background: rgba(238, 236, 232, .55);
+  border-color: var(--wifak-border) !important;
+  color: var(--wifak-muted) !important;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.table td,
+.table th {
+  border-color: var(--wifak-border) !important;
+}
+
+.table-hover tbody tr:hover,
+.table tbody tr:hover {
+  background: rgba(238, 236, 232, .45);
+}
+
+.btn-primary,
+.bg-gradient-primary,
+.btn-info {
+  background: var(--wifak-navy) !important;
+  border-color: var(--wifak-navy) !important;
+}
+
+.btn-danger,
+.bg-gradient-danger {
+  background: var(--wifak-crimson) !important;
+  border-color: var(--wifak-crimson) !important;
+}
+
+.btn-warning {
+  background: var(--wifak-gold) !important;
+  border-color: var(--wifak-gold) !important;
+  color: #171b2a !important;
+}
+
+.form-control {
+  border-color: var(--wifak-border);
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  border-color: rgba(27, 43, 94, .45);
+  box-shadow: 0 0 0 2px rgba(27, 43, 94, .12);
+}
+
+.badge-primary {
+  background: var(--wifak-navy);
+}
+
+.badge-danger {
+  background: var(--wifak-crimson);
+}
+
+.wifak-admin-shell .header {
+  background: transparent !important;
+  min-height: 0 !important;
+  padding: 2.5rem 2rem 0 !important;
+}
+
+.wifak-admin-shell .header .container-fluid,
+.wifak-admin-shell > .container-fluid,
+.wifak-admin-shell .wifak-page-host > .container-fluid {
+  max-width: 1400px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.wifak-admin-shell .mt--7 {
+  margin-top: 0 !important;
+}
+
+.wifak-admin-shell .header h1,
+.wifak-admin-shell .header .text-white {
+  color: var(--wifak-ink) !important;
+}
+
+.wifak-admin-shell .header .text-white-50 {
+  color: var(--wifak-muted) !important;
+}
+
+.wifak-admin-shell .header-body {
+  padding: 0;
+}
+
+.wifak-admin-shell .card {
+  background: #fff;
+}
+
+.wifak-admin-shell .card-header {
+  padding: 1.35rem 1.5rem;
+}
+
+.wifak-admin-shell .card-header h3,
+.wifak-admin-shell .card-header h2,
+.wifak-admin-shell .card-header .mb-0 {
+  color: var(--wifak-ink);
+  font-weight: 800;
+}
+
+.wifak-admin-shell .card-header small,
+.wifak-admin-shell .text-muted {
+  color: var(--wifak-muted) !important;
+}
+
+.wifak-admin-shell .card-body {
+  padding: 1.5rem;
+}
+
+.wifak-admin-shell .card-stats .icon {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.wifak-admin-shell .card-stats .h2,
+.wifak-admin-shell .card-stats .font-weight-bold {
+  color: var(--wifak-ink);
+}
+
+.wifak-admin-shell .table-responsive {
+  border-radius: 0 0 8px 8px;
+}
+
+.wifak-admin-shell .table-flush tbody tr:first-child td,
+.wifak-admin-shell .table-flush tbody tr:first-child th {
+  border-top: 1px solid var(--wifak-border);
+}
+
+.wifak-admin-shell .badge {
+  border-radius: 999px;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.wifak-admin-shell .badge-info,
+.wifak-admin-shell .badge-primary {
+  background: rgba(27, 43, 94, .1);
+  color: var(--wifak-navy);
+}
+
+.wifak-admin-shell .badge-success {
+  background: rgba(47, 125, 120, .12);
+  color: #2f7d78;
+}
+
+.wifak-admin-shell .badge-default {
+  background: rgba(119, 121, 133, .12);
+  color: var(--wifak-muted);
+}
+
+.wifak-admin-shell .btn {
+  border-radius: 8px;
+  box-shadow: none !important;
+  font-weight: 750;
+}
+
+.wifak-admin-shell .btn-neutral,
+.wifak-admin-shell .btn-white {
+  background: #fff !important;
+  border: 1px solid var(--wifak-border) !important;
+  color: var(--wifak-ink) !important;
+}
+
+.wifak-admin-shell .btn-info {
+  background: rgba(27, 43, 94, .08) !important;
+  border-color: rgba(27, 43, 94, .14) !important;
+  color: var(--wifak-navy) !important;
+}
+
+.wifak-admin-shell .btn-outline-danger {
+  border-color: rgba(192, 57, 43, .35);
+  color: var(--wifak-crimson);
+}
+
+.wifak-admin-shell label,
+.wifak-admin-shell .form-control-label {
+  color: var(--wifak-ink);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.wifak-admin-shell textarea.form-control {
+  min-height: 7rem;
+}
+
+.wifak-admin-shell .custom-control-label::before,
+.wifak-admin-shell .custom-control-label::after {
+  border-radius: 6px;
+}
+
+.wifak-admin-shell .custom-control-input:checked ~ .custom-control-label::before {
+  background: var(--wifak-navy);
+  border-color: var(--wifak-navy);
+}
+
+.wifak-admin-shell .learning-hero,
+.wifak-admin-shell .empty-state,
+.wifak-admin-shell .empty-builder {
+  border-radius: 8px !important;
+}
+
+.wifak-admin-shell .course-thumb {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.wifak-bloom-page {
+  padding: 2.5rem 2rem;
+}
+
+.wifak-bloom-header {
+  align-items: flex-end;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+.wifak-bloom-eyebrow {
+  color: var(--wifak-muted);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  margin: 0 0 .5rem;
+  text-transform: uppercase;
+}
+
+.wifak-bloom-title {
+  color: var(--wifak-ink);
+  font-size: 2.25rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.wifak-bloom-subtitle {
+  color: var(--wifak-muted);
+  font-size: .92rem;
+  margin: .65rem 0 0;
+  max-width: 42rem;
+}
+
+.wifak-stat-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.wifak-stat-card,
+.wifak-bloom-card {
+  background: #fff;
+  border: 1px solid var(--wifak-border);
+  border-radius: 8px;
+}
+
+.wifak-stat-card {
+  padding: 1.25rem;
+}
+
+.wifak-stat-card span {
+  color: var(--wifak-muted);
+  display: block;
+  font-size: .74rem;
+  font-weight: 750;
+}
+
+.wifak-stat-card strong {
+  color: var(--wifak-ink);
+  display: block;
+  font-size: 1.9rem;
+  margin-top: .45rem;
+}
+
+.wifak-bloom-card {
+  padding: 1.5rem;
+}
+
+.wifak-bloom-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.wifak-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.wifak-pill {
+  background: rgba(27, 43, 94, .08);
+  border: 1px solid rgba(27, 43, 94, .12);
+  border-radius: 999px;
+  color: var(--wifak-navy);
+  font-size: .78rem;
+  font-weight: 750;
+  padding: .45rem .7rem;
+}
+
+@media (max-width: 991px) {
+  .wifak-stat-grid,
+  .wifak-bloom-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .wifak-admin-shell .header,
+  .wifak-bloom-page {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .wifak-admin-shell .header .container-fluid,
+  .wifak-admin-shell .wifak-page-host > .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .wifak-bloom-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .wifak-stat-grid,
+  .wifak-bloom-grid {
+    grid-template-columns: 1fr;
+  }
+}

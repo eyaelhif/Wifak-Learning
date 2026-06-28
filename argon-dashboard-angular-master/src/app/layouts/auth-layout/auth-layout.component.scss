@@ -1,0 +1,53 @@
+.wifak-auth-brand {
+  align-items: center;
+  display: flex;
+  gap: .75rem;
+  text-transform: none;
+}
+
+.wifak-auth-mark {
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(6, 85, 155, .18);
+  display: inline-flex;
+  height: 44px;
+  justify-content: center;
+  overflow: hidden;
+  width: 44px;
+}
+
+.wifak-auth-mark img {
+  height: 36px;
+  max-width: 36px;
+  object-fit: contain;
+  width: 36px;
+}
+
+.wifak-auth-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.wifak-auth-text strong {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.wifak-auth-text small {
+  color: rgba(255, 255, 255, .74);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.wifak-auth-text.text-dark strong {
+  color: #343a40;
+}
+
+.wifak-auth-text.text-dark small {
+  color: #878e95;
+}

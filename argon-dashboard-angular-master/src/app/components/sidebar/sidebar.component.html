@@ -1,0 +1,57 @@
+<button class="wifak-mobile-toggle" type="button" (click)="isCollapsed = !isCollapsed" aria-label="Toggle navigation">
+  <i class="fas fa-bars"></i>
+</button>
+
+<aside class="wifak-sidebar" [class.is-open]="!isCollapsed">
+  <div class="wifak-brand-block">
+    <a class="wifak-brand" routerLink="/admin/dashboard" (click)="isCollapsed = true">
+      <span class="wifak-logo-mark">
+        <img src="assets/img/brand/wifak-learning-mark.png" alt="Wifak Learning">
+      </span>
+      <span class="wifak-brand-text">
+        <strong>Wifak Learning</strong>
+        <small>Knowledge, refined</small>
+      </span>
+    </a>
+    <button class="wifak-close d-md-none" type="button" (click)="isCollapsed = true" aria-label="Close navigation">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <nav class="wifak-nav">
+    <p class="wifak-nav-heading">Workspace</p>
+    <a *ngFor="let menuItem of menuItems"
+      routerLinkActive="active"
+      [routerLink]="[menuItem.path]"
+      class="wifak-nav-link"
+      (click)="isCollapsed = true">
+      <i class="ni {{ menuItem.icon }}"></i>
+      <span>{{ menuItem.title }}</span>
+    </a>
+
+    <p class="wifak-nav-heading account-heading">Account</p>
+    <a routerLink="/user-profile" routerLinkActive="active" class="wifak-nav-link" (click)="isCollapsed = true">
+      <i class="ni ni-badge"></i>
+      <span>Certificates</span>
+    </a>
+    <button class="wifak-nav-link nav-button" type="button">
+      <i class="ni ni-settings-gear-65"></i>
+      <span>Settings</span>
+    </button>
+    <button class="wifak-nav-link nav-button" type="button" (click)="openFrontoffice()">
+      <i class="ni ni-world-2"></i>
+      <span>Frontoffice</span>
+    </button>
+  </nav>
+
+  <div class="wifak-user-card" (click)="logout()">
+    <span class="wifak-user-avatar">WL</span>
+    <span class="wifak-user-meta">
+      <strong>Wifak User</strong>
+      <small>Learning workspace</small>
+    </span>
+    <i class="ni ni-user-run"></i>
+  </div>
+</aside>
+
+<div class="wifak-sidebar-backdrop" *ngIf="!isCollapsed" (click)="isCollapsed = true"></div>

@@ -1,0 +1,126 @@
+<main class="auth-container">
+  <!-- Diagonal accent lines -->
+  <div class="diagonal-pattern"></div>
+
+  <div class="auth-wrapper">
+    <div class="auth-panels">
+      <!-- LEFT PANEL — Sign in -->
+      <section class="auth-panel signin-panel">
+        <div class="panel-content">
+          <div class="brand-section">
+            <div class="brand-icon">
+              <img src="assets/img/brand/wifak-logo.png" alt="Wifak Learning" class="brand-logo">
+            </div>
+            <div class="brand-text">
+              <div class="brand-name">Wifak Learning</div>
+              <div class="brand-subtitle">Knowledge, refined.</div>
+            </div>
+          </div>
+
+          <h1 class="panel-title">Welcome Back</h1>
+          <p class="panel-description">
+            Sign in to continue your learning journey on Wifak Learning and pick up right where you left off.
+          </p>
+
+          <!-- Login form -->
+          <div class="form-section" *ngIf="!showRegister">
+            <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+            <form [formGroup]="form" (ngSubmit)="login()">
+              <div class="form-group">
+                <input type="email" placeholder="Enter your email" class="form-input" formControlName="email">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password" class="form-input" formControlName="password">
+              </div>
+
+              <button type="submit" class="btn-primary-gradient" [disabled]="loading">
+                {{ loading ? 'Signing in...' : 'Continue' }}
+              </button>
+            </form>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider" *ngIf="!showRegister">
+            <div class="divider-line"></div>
+            <span class="divider-text">or</span>
+            <div class="divider-line"></div>
+          </div>
+
+          <!-- OAuth -->
+          <div class="oauth-section" *ngIf="!showRegister">
+            <button type="button" class="oauth-btn">
+              <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </button>   
+          </div>
+
+          <p class="terms-text" *ngIf="!showRegister">
+            By creating an account I agree to the Wifak Learning<br>
+            terms of service and privacy policy.
+          </p>
+          <button type="button" (click)="toggleRegister()" class="toggle-link" *ngIf="!showRegister">
+            Don't have an account? Sign up
+          </button>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL — Sign up -->
+      <section class="auth-panel signup-panel" [class.show-register]="showRegister">
+        <div class="panel-content">
+          <div class="brand-section">
+            <div class="brand-icon">
+              <img src="assets/img/brand/wifak-logo.png" alt="Wifak Learning" class="brand-logo">
+            </div>
+            <div class="brand-text">
+              <div class="brand-name">Wifak Learning</div>
+              <div class="brand-subtitle">Create your account</div>
+            </div>
+          </div>
+
+          <h1 class="panel-title">Create Account</h1>
+          <p class="panel-description">
+            Join Wifak Learning and start your learning journey today.
+          </p>
+
+          <div class="form-section">
+            <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+              <div class="form-group">
+                <input type="text" placeholder="Full name" class="form-input" formControlName="fullName">
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Enter your email" class="form-input" formControlName="email">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password (min. 6 characters)" class="form-input" formControlName="password">
+              </div>
+              <div class="checkbox-group">
+                <input type="checkbox" id="login-register-terms" class="checkbox-input" formControlName="terms">
+                <label for="login-register-terms" class="checkbox-label">
+                  I agree with the <a href="#" class="terms-link">Privacy Policy</a>
+                </label>
+              </div>
+              <button type="submit" class="btn-primary-gradient" [disabled]="loading">
+                {{ loading ? 'Creating account...' : 'Sign up' }}
+              </button>
+            </form>
+          </div>
+
+          <button type="button" (click)="toggleRegister()" class="toggle-link">
+            Already have an account? Sign in
+          </button>
+        </div>
+      </section>
+
+      <!-- SLIDING PATTERN CARD -->
+      <div class="sliding-pattern" [ngClass]="{'show-register': showRegister}">
+        <div class="pattern-content">
+          <img src="assets/img/brand/ribbon.jpg" alt="Abstract Wifak Learning ribbon" class="pattern-image">
+          <div class="version-tag">V1.1.2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

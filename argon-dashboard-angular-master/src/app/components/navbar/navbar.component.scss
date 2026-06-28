@@ -1,0 +1,172 @@
+:host {
+  --wifak-navy: #1b2b5e;
+  --wifak-crimson: #c0392b;
+  --wifak-gold: #c9a84c;
+  --wifak-warm: #f5f4f0;
+  --wifak-stone: #eeece8;
+  --wifak-border: #e5e1d8;
+  --wifak-muted: #777985;
+}
+
+.wifak-topbar {
+  backdrop-filter: blur(18px);
+  background: rgba(245, 244, 240, .82);
+  border-bottom: 1px solid var(--wifak-border);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.wifak-topbar-inner {
+  align-items: center;
+  display: flex;
+  gap: 1.5rem;
+  height: 64px;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 2rem;
+}
+
+.wifak-page-title {
+  color: #171b2a;
+  font-size: .95rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: none;
+}
+
+.wifak-search {
+  align-items: center;
+  background: rgba(238, 236, 232, .75);
+  border: 1px solid var(--wifak-border);
+  border-radius: 8px;
+  flex: 1;
+  gap: .65rem;
+  height: 40px;
+  max-width: 36rem;
+  padding: 0 .85rem;
+}
+
+.wifak-search i {
+  color: var(--wifak-muted);
+  font-size: .85rem;
+}
+
+.wifak-search input {
+  background: transparent;
+  border: 0;
+  color: #171b2a;
+  flex: 1;
+  font-size: .86rem;
+  height: 100%;
+  outline: 0;
+}
+
+.wifak-search input::placeholder {
+  color: var(--wifak-muted);
+}
+
+.wifak-actions {
+  align-items: center;
+  display: flex;
+  gap: .75rem;
+  margin-left: auto;
+}
+
+.wifak-streak {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--wifak-border);
+  border-radius: 8px;
+  color: #171b2a;
+  gap: .5rem;
+  height: 36px;
+  padding: 0 .85rem;
+}
+
+.wifak-streak span {
+  background: var(--wifak-gold);
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}
+
+.wifak-streak strong {
+  font-size: .76rem;
+}
+
+.wifak-icon-btn,
+.wifak-user-btn {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--wifak-border);
+  border-radius: 8px;
+  color: #171b2a;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+}
+
+.wifak-icon-btn {
+  width: 36px;
+}
+
+.wifak-user-btn {
+  gap: .55rem;
+  padding: 0 .55rem 0 .35rem;
+}
+
+.wifak-user-btn::after {
+  display: none;
+}
+
+.wifak-avatar {
+  align-items: center;
+  background: linear-gradient(135deg, var(--wifak-navy), var(--wifak-crimson));
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-size: .68rem;
+  font-weight: 800;
+  height: 28px;
+  justify-content: center;
+  width: 28px;
+}
+
+.wifak-user-name {
+  font-size: .82rem;
+  font-weight: 700;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-menu {
+  border: 1px solid var(--wifak-border);
+  border-radius: 8px;
+  box-shadow: 0 20px 45px rgba(27, 43, 94, .12);
+}
+
+.dropdown-item {
+  align-items: center;
+  display: flex;
+  gap: .6rem;
+}
+
+@media (max-width: 767px) {
+  .wifak-topbar {
+    position: fixed;
+    right: 0;
+    left: 0;
+  }
+
+  .wifak-topbar-inner {
+    height: 64px;
+    padding: 0 1rem 0 4.5rem;
+  }
+
+  .wifak-page-title {
+    font-size: .88rem;
+  }
+}

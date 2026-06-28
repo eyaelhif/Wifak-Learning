@@ -1,0 +1,48 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row justify-content-center">
+    <div class="col-xl-9">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Profile permissions</h3>
+          <small class="text-muted" *ngIf="profil">{{ profil.name }}</small>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+          <div class="text-center py-4" *ngIf="loading">Loading permissions...</div>
+
+          <div *ngIf="!loading">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let permission of permissions">
+                <div class="custom-control custom-checkbox permission-item">
+                  <input
+                    class="custom-control-input"
+                    type="checkbox"
+                    [id]="'permission-' + permission.id"
+                    [checked]="isSelected(permission.id)"
+                    (change)="togglePermission(permission.id, $any($event.target).checked)">
+                  <label class="custom-control-label" [for]="'permission-' + permission.id">
+                    <strong>{{ permission.name }}</strong>
+                    <span class="d-block text-muted">{{ permission.description }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a class="btn btn-neutral" routerLink="/profils">Cancel</a>
+              <button class="btn btn-primary" type="button" (click)="save()" [disabled]="saving">
+                {{ saving ? 'Saving...' : 'Save permissions' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

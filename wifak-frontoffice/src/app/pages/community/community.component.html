@@ -1,0 +1,58 @@
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="section-label">TOGETHER</div>
+    <h1 class="page-title">
+      The <span class="text-gold">Community</span>
+    </h1>
+    <p class="page-subtitle">
+      Conversations from 4,200+ banking professionals across compliance, risk, and digital banking.
+    </p>
+  </div>
+
+  <div class="main-grid">
+
+    <!-- Discussions -->
+    <div class="discussions">
+      <article *ngFor="let d of discussions" class="discussion-card">
+        <div class="discussion-inner">
+          <div class="disc-avatar">{{ getInitials(d.author) }}</div>
+          <div class="disc-body">
+            <div class="disc-meta">
+              <span class="disc-author">{{ d.author }}</span>
+              <span class="disc-separator">·</span>
+              <span class="disc-role">{{ d.role }}</span>
+              <span class="disc-tag">{{ d.tag }}</span>
+            </div>
+            <h3 class="disc-title">{{ d.title }}</h3>
+            <div class="disc-stats">
+              <span>💬 {{ d.replies }}</span>
+              <span>❤️ {{ d.likes }}</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Leaderboard -->
+    <aside class="leaderboard-card">
+      <div class="lb-header">
+        <span class="lb-icon">🏆</span>
+        <h3 class="lb-title">Leaderboard</h3>
+      </div>
+      <div class="lb-list">
+        <div *ngFor="let p of leaderboard; let i = index" class="lb-item">
+          <div class="lb-rank">{{ p.badge || (i + 1) }}</div>
+          <div class="lb-avatar">{{ getInitials(p.name) }}</div>
+          <div class="lb-name">{{ p.name }}</div>
+          <div class="lb-xp">{{ p.xp | number }} XP</div>
+        </div>
+      </div>
+      <div class="lb-footer">
+        👥 4,247 active learners this week
+      </div>
+    </aside>
+
+  </div>
+</div>

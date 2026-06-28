@@ -1,0 +1,353 @@
+.ai-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #0F1C3F;
+}
+
+.ai-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr auto;
+  }
+
+  h1 {
+    margin: 0.4rem 0;
+    font-size: 3rem;
+    line-height: 1.05;
+    font-weight: 800;
+  }
+
+  p {
+    max-width: 720px;
+    color: #667085;
+    line-height: 1.7;
+  }
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #D4A843;
+  font-weight: 800;
+}
+
+.status-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(15, 28, 63, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 30px rgba(15, 28, 63, 0.08);
+
+  small {
+    display: block;
+    color: #667085;
+  }
+}
+
+.status-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+}
+
+.upload-band {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 840px) {
+    grid-template-columns: 1fr 220px;
+  }
+}
+
+.drop-zone {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 110px;
+  padding: 1.25rem;
+  border: 1.5px dashed rgba(15, 28, 63, 0.2);
+  border-radius: 0.8rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(244,247,251,0.95));
+
+  input {
+    display: none;
+  }
+
+  strong, small {
+    display: block;
+  }
+
+  small {
+    color: #667085;
+    margin-top: 0.2rem;
+  }
+}
+
+.upload-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: #0F1C3F;
+  color: #D4A843;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.primary-action {
+  border: none;
+  border-radius: 0.8rem;
+  background: linear-gradient(135deg, #0F1C3F, #263b78);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.error-box, .loading-state, .summary-main, .summary-side, .tool-box, .tab-panel, .flashcard, .quiz-card, .content-block {
+  border: 1px solid rgba(15, 28, 63, 0.08);
+  background: white;
+  border-radius: 0.8rem;
+  box-shadow: 0 12px 30px rgba(15, 28, 63, 0.07);
+}
+
+.error-box {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #b42318;
+  background: #fff4f2;
+}
+
+.loading-state {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+}
+
+.loader {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 4px solid #eef2f6;
+  border-top-color: #D4A843;
+  animation: spin 0.8s linear infinite;
+}
+
+.summary-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin: 1.5rem 0;
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1.4fr 0.8fr;
+  }
+}
+
+.summary-main, .summary-side, .tool-box, .tab-panel {
+  padding: 1.25rem;
+}
+
+.summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+
+  span {
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #475467;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+}
+
+.summary-main h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.7rem;
+}
+
+.keyword-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  span {
+    padding: 0.45rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(212, 168, 67, 0.14);
+    color: #8a6416;
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+}
+
+.smart-tools {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.25rem;
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.inline-form {
+  display: flex;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #d0d5dd;
+    border-radius: 0.6rem;
+    padding: 0.75rem;
+  }
+
+  button {
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0 1rem;
+    background: #0F1C3F;
+    color: white;
+    font-weight: 700;
+  }
+}
+
+.result-list p, .answer-box {
+  margin: 0.75rem 0 0;
+  padding: 0.8rem;
+  background: #f8fafc;
+  border-radius: 0.6rem;
+  color: #475467;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  button {
+    border: 1px solid rgba(15, 28, 63, 0.1);
+    background: white;
+    color: #0F1C3F;
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    font-weight: 800;
+    cursor: pointer;
+
+    &.active {
+      background: #0F1C3F;
+      color: white;
+    }
+  }
+}
+
+.chapter-card {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eef2f6;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.chapter-order {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.65rem;
+  background: #0F1C3F;
+  color: #D4A843;
+  font-weight: 800;
+}
+
+.cards-grid, .quiz-list, .content-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.cards-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.flashcard, .quiz-card, .content-block {
+  padding: 1rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  button {
+    border: 1px solid #d0d5dd;
+    border-radius: 0.6rem;
+    background: white;
+    color: #0F1C3F;
+    padding: 0.65rem 0.85rem;
+    cursor: pointer;
+
+    &.selected {
+      border-color: #D4A843;
+    }
+
+    &.correct {
+      background: #ecfdf3;
+      border-color: #22c55e;
+    }
+
+    &.wrong {
+      background: #fff4f2;
+      border-color: #ef4444;
+    }
+  }
+}
+
+.explanation {
+  color: #667085;
+  background: #f8fafc;
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+}
+
+.content-block span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #D4A843;
+  font-weight: 800;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

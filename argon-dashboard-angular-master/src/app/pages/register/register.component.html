@@ -1,0 +1,89 @@
+<main class="auth-container">
+  <!-- Diagonal accent lines -->
+  <div class="diagonal-pattern"></div>
+
+  <div class="auth-wrapper">
+    <div class="auth-panels">
+      <section class="auth-panel signin-panel">
+        <div class="panel-content">
+          <div class="brand-section">
+            <div class="brand-icon">
+              <img src="assets/img/brand/wifak-logo.png" alt="Wifak Learning" class="brand-logo">
+            </div>
+            <div class="brand-text">
+              <div class="brand-name">Wifak Learning</div>
+              <div class="brand-subtitle">Knowledge, refined.</div>
+            </div>
+          </div>
+
+          <h1 class="panel-title">Welcome Back</h1>
+          <p class="panel-description">
+            Already learning with Wifak? Sign in and continue from your workspace.
+          </p>
+
+          <a routerLink="/login" class="btn-primary-gradient auth-link-button">Sign in</a>
+          <p class="terms-text">
+            Secure access for Wifak Learning members.
+          </p>
+        </div>
+      </section>
+
+      <section class="auth-panel signup-panel">
+        <div class="panel-content">
+          <div class="brand-section">
+            <div class="brand-icon">
+              <img src="assets/img/brand/wifak-logo.png" alt="Wifak Learning" class="brand-logo">
+            </div>
+            <div class="brand-text">
+              <div class="brand-name">Wifak Learning</div>
+              <div class="brand-subtitle">Create your account</div>
+            </div>
+          </div>
+
+          <h1 class="panel-title">Create Account</h1>
+          <p class="panel-description">
+            Join Wifak Learning and start your learning journey today.
+          </p>
+
+          <div class="form-section">
+            <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+            <form [formGroup]="form" (ngSubmit)="register()">
+              <div class="form-group">
+                <input type="text" placeholder="Full name" class="form-input" formControlName="fullName">
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Enter your email" class="form-input" formControlName="email">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password (min. 6 characters)" class="form-input" formControlName="password">
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="terms" class="checkbox-input" formControlName="terms">
+                <label for="terms" class="checkbox-label">
+                  I agree with the <a href="#" class="terms-link">Privacy Policy</a>
+                </label>
+              </div>
+
+              <button type="submit" class="btn-primary-gradient" [disabled]="loading">
+                {{ loading ? 'Creating account...' : 'Create account' }}
+              </button>
+            </form>
+          </div>
+
+          <p class="signin-link">
+            Already have an account? 
+            <a routerLink="/login" class="link-text">Sign in</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="sliding-pattern">
+        <div class="pattern-content">
+          <img src="assets/img/brand/ribbon.jpg" alt="Abstract Wifak Learning ribbon" class="pattern-image">
+          <div class="version-tag">V1.1.2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

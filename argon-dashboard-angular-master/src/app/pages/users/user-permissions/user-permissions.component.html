@@ -1,0 +1,48 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row justify-content-center">
+    <div class="col-xl-9">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">User profiles</h3>
+          <small class="text-muted" *ngIf="user">{{ user.fullName }} - {{ user.email }}</small>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+          <div class="text-center py-4" *ngIf="loading">Loading profiles...</div>
+
+          <div *ngIf="!loading">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let profil of profils">
+                <div class="custom-control custom-checkbox permission-item">
+                  <input
+                    class="custom-control-input"
+                    type="checkbox"
+                    [id]="'profil-' + profil.id"
+                    [checked]="isSelected(profil.id)"
+                    (change)="toggleProfil(profil.id, $any($event.target).checked)">
+                  <label class="custom-control-label" [for]="'profil-' + profil.id">
+                    <strong>{{ profil.name }}</strong>
+                    <span class="d-block text-muted">{{ profil.permissions?.join(', ') || 'No permissions yet' }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a class="btn btn-neutral" routerLink="/users">Cancel</a>
+              <button class="btn btn-primary" type="button" (click)="save()" [disabled]="saving">
+                {{ saving ? 'Saving...' : 'Save profiles' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

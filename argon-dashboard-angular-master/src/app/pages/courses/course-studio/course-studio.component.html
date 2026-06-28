@@ -1,0 +1,145 @@
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="text-white mb-1">{{ course?.title || 'Course studio' }}</h1>
+          <p class="text-white-50 mb-0">{{ course?.description }}</p>
+        </div>
+        <div class="col-lg-4 text-lg-right mt-3 mt-lg-0">
+          <a class="btn btn-sm btn-white" [routerLink]="['/admin/quizzes/new']" [queryParams]="{ courseId: courseId }" *appHasPermission="['CREATE_QUIZ', 'MANAGE_USERS']">Add quiz</a>
+          <a class="btn btn-sm btn-neutral" routerLink="/admin/courses">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header">
+          <h3 class="mb-0">New chapter</h3>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+          <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+          <form (ngSubmit)="addChapter()" *appHasPermission="['MANAGE_USERS', 'VALIDATE_CONTENT', 'GENERATE_AI_CONTENT']">
+            <div class="form-group">
+              <label class="form-control-label">Title</label>
+              <input class="form-control" name="chapterTitle" [(ngModel)]="chapterForm.title" required>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Learning objective</label>
+              <textarea class="form-control" rows="5" name="chapterContent" [(ngModel)]="chapterForm.content" required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Order</label>
+              <input class="form-control" type="number" min="1" name="chapterOrder" [(ngModel)]="chapterForm.chapterOrder">
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="saving">
+              {{ saving ? 'Saving...' : 'Add chapter' }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card shadow mt-4" *appHasPermission="['MANAGE_USERS', 'VALIDATE_CONTENT', 'GENERATE_AI_CONTENT']">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div>
+            <h3 class="mb-0">AI OCR analysis</h3>
+            <small class="text-muted">Upload a PDF or image, then publish the generated analysis in the frontoffice.</small>
+          </div>
+          <span class="badge badge-success" *ngIf="aiAnalysis">Published</span>
+        </div>
+        <div class="card-body">
+          <div class="ai-upload-zone">
+            <input class="form-control" type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onAiFileSelected($event)">
+            <button class="btn btn-primary" type="button" [disabled]="aiUploading || !selectedAiFile" (click)="uploadAiCourse()">
+              {{ aiUploading ? 'Analyzing...' : 'Analyze and publish' }}
+            </button>
+          </div>
+          <div class="text-muted mt-3" *ngIf="aiLoading">Loading existing AI analysis...</div>
+          <div class="ai-analysis-preview" *ngIf="aiAnalysis">
+            <div class="ai-metrics">
+              <span>{{ aiAnalysis.language | uppercase }}</span>
+              <span>{{ aiAnalysis.confidence }}% OCR</span>
+              <span>{{ aiAnalysis.analysis.chapters.length }} chapters</span>
+              <span>{{ aiAnalysis.analysis.quiz.length }} quiz questions</span>
+            </div>
+            <h4>{{ aiAnalysis.title }}</h4>
+            <p>{{ aiAnalysis.shortSummary }}</p>
+            <div class="keyword-row">
+              <span *ngFor="let keyword of aiAnalysis.analysis.keywords.slice(0, 12)">{{ keyword }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-8">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Chapters and lessons</h3>
+        </div>
+        <div class="card-body pt-0">
+          <div class="text-center py-5" *ngIf="loading">Loading studio...</div>
+          <div class="empty-state" *ngIf="!loading && chapters.length === 0">
+            <i class="ni ni-collection"></i>
+            <h3>No chapters yet</h3>
+            <p>Create the first chapter to start shaping this course.</p>
+          </div>
+
+          <div class="chapter-block" *ngFor="let chapter of chapters">
+            <button class="chapter-head" type="button" (click)="setOpenChapter(chapter.id)">
+              <span class="order">{{ chapter.chapterOrder }}</span>
+              <span>
+                <strong>{{ chapter.title }}</strong>
+                <small>{{ chapter.content }}</small>
+              </span>
+              <i class="ni" [ngClass]="openChapterId === chapter.id ? 'ni-bold-up' : 'ni-bold-down'"></i>
+            </button>
+
+            <div class="chapter-body" *ngIf="openChapterId === chapter.id">
+              <div class="lesson-row" *ngFor="let lesson of lessonsByChapter[chapter.id] || []">
+                <div>
+                  <strong>{{ lesson.orderIndex }}. {{ lesson.title }}</strong>
+                  <small>{{ lesson.durationMinutes }} min - {{ lesson.published ? 'Published' : 'Draft' }}</small>
+                  <p>{{ lesson.description }}</p>
+                </div>
+                <button class="btn btn-sm btn-outline-danger" type="button" (click)="deleteLesson(chapter.id, lesson)" *appHasPermission="['MANAGE_USERS', 'VALIDATE_CONTENT']">Delete</button>
+              </div>
+
+              <form class="lesson-form" (ngSubmit)="addLesson(chapter.id)" *appHasPermission="['MANAGE_USERS', 'VALIDATE_CONTENT', 'GENERATE_AI_CONTENT']">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input class="form-control form-control-sm" name="lessonTitle{{ chapter.id }}" placeholder="Lesson title" [(ngModel)]="lessonForm.title" required>
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control form-control-sm" type="number" min="1" name="lessonOrder{{ chapter.id }}" placeholder="Order" [(ngModel)]="lessonForm.orderIndex">
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control form-control-sm" type="number" min="1" name="lessonDuration{{ chapter.id }}" placeholder="Minutes" [(ngModel)]="lessonForm.durationMinutes">
+                  </div>
+                </div>
+                <textarea class="form-control form-control-sm mt-3" rows="2" name="lessonDescription{{ chapter.id }}" placeholder="Lesson summary" [(ngModel)]="lessonForm.description" required></textarea>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <label class="custom-toggle mb-0">
+                    <input type="checkbox" name="lessonPublished{{ chapter.id }}" [(ngModel)]="lessonForm.published">
+                    <span class="custom-toggle-slider rounded-circle"></span>
+                  </label>
+                  <button class="btn btn-sm btn-primary" type="submit" [disabled]="saving">Add lesson</button>
+                </div>
+              </form>
+
+              <div class="text-right mt-3">
+                <button class="btn btn-sm btn-danger" type="button" (click)="deleteChapter(chapter)" *appHasPermission="['MANAGE_USERS', 'VALIDATE_CONTENT']">Delete chapter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

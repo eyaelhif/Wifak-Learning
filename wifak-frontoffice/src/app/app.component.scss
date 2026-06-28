@@ -1,0 +1,49 @@
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background: linear-gradient(180deg, #f6f4ef 0%, #ecebe6 100%);
+}
+
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -10;
+  filter: blur(80px);
+
+  &.glow-gold {
+    top: -8rem; left: -8rem;
+    width: 31rem; height: 31rem;
+    background: radial-gradient(circle, #D4A843, transparent 70%);
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  &.glow-navy {
+    top: 50%; right: -10rem;
+    width: 37rem; height: 37rem;
+    background: radial-gradient(circle, #0F1C3F, transparent 70%);
+    opacity: 0.25;
+    animation: float 8s ease-in-out infinite 3s;
+  }
+}
+
+.main-content {
+  padding-top: 7rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}

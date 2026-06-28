@@ -1,0 +1,84 @@
+<div class="page-container">
+
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-glow glow-gold"></div>
+    <div class="hero-glow glow-purple"></div>
+
+    <!-- Particles -->
+    <div *ngFor="let p of particles" class="particle"
+      [style.left]="p.left" [style.top]="p.top"
+      [style.animationDelay]="p.delay">
+    </div>
+
+    <div class="hero-content">
+      <div>
+        <div class="hero-date">{{ today }}</div>
+        <h1 class="hero-title">
+          Good morning,<br>
+          <span class="text-gold">Yasmine</span>.
+        </h1>
+        <p class="hero-quote">
+          "A bank is built on trust — earned one decision at a time."
+        </p>
+      </div>
+      <button class="resume-btn">
+        ▶ Resume learning
+      </button>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-grid">
+    <div *ngFor="let stat of stats" class="stat-card"
+      [style.borderTop]="'3px solid ' + stat.accent">
+      <div class="stat-icon">{{ stat.icon }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+      <div class="stat-value" [style.color]="stat.accent">{{ stat.value }}</div>
+    </div>
+  </section>
+
+  <!-- Continue + Daily Challenge -->
+  <section class="bottom-grid">
+
+    <!-- Continue Lesson -->
+    <div class="lesson-card">
+      <div class="lesson-bg"></div>
+      <div class="lesson-glow"></div>
+      <div class="lesson-content">
+        <div class="lesson-chapter">CHAPTER 2 · LESSON 3 · CONTINUE</div>
+        <h2 class="lesson-title">Red Flag Indicators in Transactions</h2>
+        <p class="lesson-desc">
+          Spot unusual patterns, structuring, and high-risk geographies
+          before they reach compliance escalation.
+        </p>
+        <div class="progress-row">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width]="progressWidth"></div>
+          </div>
+          <span class="progress-pct">62%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Challenge -->
+    <div class="challenge-card">
+      <div class="challenge-header">
+        <span class="challenge-label">DAILY CHALLENGE</span>
+        <span class="challenge-timer">⏱ 14:32</span>
+      </div>
+      <p class="challenge-question">
+        Under Basel III, what is the minimum Common Equity Tier 1 (CET1)
+        capital ratio required for banks?
+      </p>
+      <div class="challenge-options">
+        <button class="option-btn">3.5%</button>
+        <button class="option-btn">4.5%</button>
+        <button class="option-btn">6.0%</button>
+        <button class="option-btn">8.0%</button>
+      </div>
+    </div>
+
+  </section>
+</div>

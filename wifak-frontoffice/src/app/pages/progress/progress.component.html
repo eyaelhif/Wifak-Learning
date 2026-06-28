@@ -1,0 +1,79 @@
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="section-label">YOUR JOURNEY</div>
+    <h1 class="page-title">
+      Progress & <span class="text-gold">Mastery</span>
+    </h1>
+  </div>
+
+  <!-- Stats -->
+  <section class="stats-grid">
+    <div *ngFor="let stat of stats" class="stat-card"
+      [style.borderTop]="'3px solid ' + stat.accent">
+      <div class="stat-icon">{{ stat.icon }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+      <div class="stat-value" [style.color]="stat.accent">{{ stat.value }}</div>
+    </div>
+  </section>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+
+    <!-- Weekly XP Bar Chart -->
+    <div class="glass-card">
+      <div class="chart-header">
+        <div>
+          <h3 class="chart-title">Weekly XP</h3>
+          <p class="chart-subtitle">Last 12 weeks</p>
+        </div>
+        <div class="chart-total">+2,840</div>
+      </div>
+      <div class="bar-chart">
+        <div *ngFor="let w of weeks; let i = index"
+          class="bar-wrapper">
+          <div class="bar-fill"
+            [style.height]="barHeights[i] || '0%'"
+            [style.transitionDelay]="(i * 0.05) + 's'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill Mastery -->
+    <div class="glass-card">
+      <h3 class="chart-title mb-5">Skill Mastery</h3>
+      <div class="skills-list">
+        <div *ngFor="let skill of skills; let i = index" class="skill-row">
+          <div class="skill-header">
+            <span class="skill-name">{{ skill.name }}</span>
+            <span class="skill-pct">{{ skill.value }}%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill"
+              [style.width]="skillWidths[i] || '0%'"
+              [style.transitionDelay]="(i * 0.1) + 's'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Certificates -->
+  <section class="certs-section">
+    <h2 class="certs-title">Recent Certificates</h2>
+    <div class="certs-grid">
+      <div *ngFor="let cert of certificates" class="cert-card">
+        <div class="cert-glow"></div>
+        <div class="cert-icon">🏆</div>
+        <div class="cert-year">CERTIFIED · {{ cert.year }}</div>
+        <h4 class="cert-name">{{ cert.title }}</h4>
+        <div class="cert-issuer">Issued by Wifak Bank Academy</div>
+      </div>
+    </div>
+  </section>
+
+</div>

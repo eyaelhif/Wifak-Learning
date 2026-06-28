@@ -1,0 +1,237 @@
+.page-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// ── Header ──
+.page-header { margin-bottom: 2rem; }
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #888;
+  font-weight: 600;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0F1C3F;
+  margin-top: 0.5rem;
+  @media(min-width: 768px) { font-size: 4rem; }
+}
+
+.text-gold {
+  background: linear-gradient(90deg, #D4A843, #f5d078);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ── Stats ──
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  @media(min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.stat-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+}
+
+.stat-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #888;
+  text-transform: uppercase;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+// ── Charts ──
+.charts-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  @media(min-width: 1024px) { grid-template-columns: 2fr 1fr; }
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F1C3F;
+}
+
+.chart-subtitle {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+.chart-total {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #D4A843, #f5d078);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ── Bar Chart ──
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 12rem;
+}
+
+.bar-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: 0.375rem 0.375rem 0 0;
+  background: linear-gradient(180deg, #1e2f6b, #0F1C3F);
+  transition: height 0.8s ease;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(180deg, #D4A843, #f5d078);
+  }
+}
+
+// ── Skills ──
+.skills-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.skill-row {}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+}
+
+.skill-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0F1C3F;
+}
+
+.skill-pct {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.skill-bar {
+  height: 8px;
+  border-radius: 9999px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #D4A843, #f5d078);
+  transition: width 1.2s ease;
+}
+
+// ── Certificates ──
+.certs-section { margin-top: 2.5rem; }
+
+.certs-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F1C3F;
+  margin-bottom: 1rem;
+}
+
+.certs-grid {
+  display: grid;
+  gap: 1rem;
+  @media(min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  @media(min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.cert-card {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0F1C3F 0%, #2d1b4e 100%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+  &:hover { transform: translateY(-6px); }
+}
+
+.cert-glow {
+  position: absolute;
+  top: -2.5rem; right: -2.5rem;
+  width: 10rem; height: 10rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #D4A843, transparent 70%);
+  opacity: 0.3;
+  filter: blur(20px);
+}
+
+.cert-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.cert-year {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+  position: relative;
+}
+
+.cert-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 0.25rem;
+  position: relative;
+}
+
+.cert-issuer {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1rem;
+  position: relative;
+}

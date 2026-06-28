@@ -1,0 +1,10 @@
+services:
+  ocr-ai-service:
+    build: .
+    container_name: wifak-ocr-ai-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/app/storage

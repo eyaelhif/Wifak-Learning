@@ -1,0 +1,35 @@
+{
+  "course_id": "uuid",
+  "source_course_id": "42",
+  "status": "COMPLETED",
+  "title": "Risk Management Fundamentals",
+  "language": "en",
+  "confidence": 91.4,
+  "short_summary": "Short AI summary.",
+  "detailed_summary": "Detailed AI summary.",
+  "keywords": ["risk", "compliance", "control"],
+  "chapters": [
+    {
+      "title": "Introduction",
+      "order": 1,
+      "summary": "Chapter summary.",
+      "content": "Chapter content.",
+      "subchapters": [],
+      "important_points": []
+    }
+  ],
+  "definitions": [],
+  "lists": [],
+  "tables": [],
+  "examples": [],
+  "important_concepts": ["risk", "control"],
+  "flashcards": [],
+  "quiz": [],
+  "structured_content": [],
+  "metadata": {
+    "filename": "course.pdf",
+    "pages": 12,
+    "ocr_engine": "tesseract"
+  },
+  "created_at": "2026-06-17T18:00:00Z"
+}

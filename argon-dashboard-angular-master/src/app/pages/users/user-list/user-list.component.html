@@ -1,0 +1,87 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0 d-flex align-items-center justify-content-between">
+          <div>
+            <h3 class="mb-0">Users</h3>
+            <small class="text-muted">Manage learner, instructor, and administrator accounts by profile.</small>
+          </div>
+          <a class="btn btn-sm btn-primary" routerLink="/users/new">
+            <i class="ni ni-fat-add"></i>
+            New user
+          </a>
+        </div>
+
+        <div class="px-4" *ngIf="message || error">
+          <div class="alert alert-success" *ngIf="message">{{ message }}</div>
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Profiles</th>
+                <th scope="col">Permissions</th>
+                <th scope="col">Courses</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Updated at</th>
+                <th scope="col">Last login</th>
+                <th scope="col" class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loading">
+                <td colspan="10" class="text-center py-5">Loading users...</td>
+              </tr>
+              <tr *ngIf="!loading && users.length === 0">
+                <td colspan="10" class="text-center py-5">No users found.</td>
+              </tr>
+              <tr *ngFor="let user of users">
+                <th scope="row">{{ user.fullName }}</th>
+                <td>{{ user.email }}</td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i [class]="user.active ? 'bg-success' : 'bg-warning'"></i>
+                    {{ user.active ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-info mr-1 mb-1" *ngFor="let profil of user.profils">
+                    {{ profil }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-primary mr-1 mb-1" *ngFor="let permission of user.permissions">
+                    {{ permission }}
+                  </span>
+                </td>
+                <td class="text-wrap">{{ getCourseTitles(user) }}</td>
+                <td>{{ formatDate(user.createdAt) }}</td>
+                <td>{{ formatDate(user.updatedAt) }}</td>
+                <td>{{ formatDate(user.lastLoginAt) }}</td>
+                <td class="text-right">
+                  <a class="btn btn-sm btn-neutral" [routerLink]="['/users', user.id, 'edit']">Edit</a>
+                  <a class="btn btn-sm btn-info" [routerLink]="['/users', user.id, 'profils']">Profiles</a>
+                  <button class="btn btn-sm btn-danger" type="button" (click)="deleteUser(user)" [disabled]="loading">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

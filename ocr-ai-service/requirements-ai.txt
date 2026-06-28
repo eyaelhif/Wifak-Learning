@@ -1,0 +1,10 @@
+# Optional heavy AI dependencies.
+# Install these only after the basic OCR flow works.
+keybert==0.8.5
+sentence-transformers==3.0.1
+transformers==4.41.2
+torch>=2.2.0
+faiss-cpu==1.8.0.post1
+langchain==0.2.5
+langchain-community==0.2.5
+spacy==3.7.5

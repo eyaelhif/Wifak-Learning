@@ -1,0 +1,54 @@
+<div class="page-container">
+  <section class="profile-hero">
+    <div class="profile-hero-bg"></div>
+    <div class="profile-hero-glow"></div>
+    <div class="profile-hero-content">
+      <div class="avatar">{{ initials }}</div>
+      <div class="profile-info">
+        <div class="profile-role">{{ profiles }}</div>
+        <h1 class="profile-name">{{ currentUser?.fullName || 'Wifak Learner' }}</h1>
+        <div class="profile-meta">
+          <span>{{ currentUser?.email || 'connected@wifakbank.tn' }}</span>
+          <span>Wifak Bank Academy</span>
+          <span>{{ currentUser?.active === false ? 'Inactive' : 'Active' }}</span>
+        </div>
+      </div>
+      <button class="edit-btn" type="button">Edit profile</button>
+    </div>
+  </section>
+
+  <section class="quick-stats">
+    <div *ngFor="let stat of stats" class="quick-stat-card"
+      [style.borderTop]="'3px solid ' + stat.accent">
+      <div class="qs-icon">{{ stat.icon }}</div>
+      <div class="qs-value" [style.color]="stat.accent">{{ stat.value }}</div>
+      <div class="qs-label">{{ stat.label }}</div>
+    </div>
+  </section>
+
+  <div class="bottom-grid">
+    <div class="glass-card">
+      <h3 class="card-title">Badges Earned</h3>
+      <div class="badges-grid">
+        <div *ngFor="let badge of badges" class="badge-item">
+          <div class="badge-emoji">{{ badge.emoji }}</div>
+          <div class="badge-name">{{ badge.name }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h3 class="card-title">Recent Activity</h3>
+      <div class="activity-list">
+        <div *ngFor="let act of activities" class="activity-item">
+          <div class="activity-dot"></div>
+          <div class="activity-body">
+            <div class="activity-type">{{ act.type }}</div>
+            <div class="activity-detail">{{ act.detail }}</div>
+          </div>
+          <div class="activity-time">{{ act.time }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

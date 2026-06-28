@@ -1,0 +1,42 @@
+<header class="wifak-topbar">
+  <div class="wifak-topbar-inner">
+    <a class="wifak-page-title" routerLink="/dashboard">{{ getTitle() }}</a>
+
+    <form class="wifak-search d-none d-md-flex">
+      <i class="fas fa-search"></i>
+      <input placeholder="Search courses, skills, users..." type="text" (focus)="focus = true" (blur)="focus = false">
+    </form>
+
+    <div class="wifak-actions">
+      <div class="wifak-streak d-none d-lg-flex">
+        <span></span>
+        <strong>12-day streak</strong>
+      </div>
+      <button class="wifak-icon-btn" type="button" aria-label="Notifications">
+        <i class="ni ni-bell-55"></i>
+      </button>
+      <div class="wifak-user-menu" ngbDropdown placement="bottom-right">
+        <button class="wifak-user-btn" type="button" ngbDropdownToggle>
+          <span class="wifak-avatar">{{ (currentUser?.fullName || 'WL').slice(0, 2).toUpperCase() }}</span>
+          <span class="wifak-user-name d-none d-lg-inline">{{ currentUser?.fullName || 'Connected user' }}</span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+          <h6 class="dropdown-header">Wifak Learning</h6>
+          <a routerLink="/user-profile" class="dropdown-item">
+            <i class="ni ni-single-02"></i>
+            <span>My profile</span>
+          </a>
+          <a routerLink="/user-profile" class="dropdown-item">
+            <i class="ni ni-settings-gear-65"></i>
+            <span>Settings</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <button type="button" class="dropdown-item" (click)="logout()">
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,83 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <div class="section-label">DISCOVER</div>
+      <h1 class="page-title">
+        Course <span class="text-gold">Library</span>
+      </h1>
+      <p class="page-subtitle">
+        Browse {{ allCourses.length }} curated courses across compliance, risk, and digital banking.
+      </p>
+    </div>
+    <div class="search-box">
+      <span class="search-icon">Search</span>
+      <input
+        [(ngModel)]="searchQuery"
+        placeholder="Search courses, skills, instructors..."
+        class="search-input" />
+    </div>
+  </div>
+
+  <div class="categories">
+    <button
+      *ngFor="let cat of categories"
+      (click)="activeCategory = cat"
+      class="cat-btn"
+      [class.active]="activeCategory === cat">
+      {{ cat }}
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="no-results">Loading courses...</div>
+  <div *ngIf="error && !loading" class="no-results">{{ error }}</div>
+
+  <section class="featured-card" *ngIf="!loading && filteredCourses.length > 0">
+    <div class="featured-bg"></div>
+    <div class="featured-glow"></div>
+    <div class="featured-content">
+      <div class="featured-badge">FEATURED COURSE</div>
+      <h2 class="featured-title">{{ filteredCourses[0].title }}</h2>
+      <p class="featured-desc">
+        {{ filteredCourses[0].description || 'Explore this banking learning path and continue building your skills.' }}
+      </p>
+      <div class="featured-actions">
+        <button class="enroll-btn">Enroll now</button>
+        <span class="featured-meta">{{ filteredCourses[0].instructor }} - {{ filteredCourses[0].duration }}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="courses-grid" *ngIf="!loading">
+    <div *ngFor="let course of filteredCourses" class="course-card">
+      <div class="course-thumb" [style.background]="course.gradient">
+        <div class="course-difficulty"
+          [style.color]="getDifficultyColor(course.difficulty)"
+          [style.borderColor]="getDifficultyColor(course.difficulty)">
+          {{ course.difficulty }}
+        </div>
+        <div class="course-rating">{{ course.rating }}</div>
+      </div>
+      <div class="course-body">
+        <div class="course-category">{{ course.category }}</div>
+        <h3 class="course-title">{{ course.title }}</h3>
+        <p class="course-instructor">{{ course.instructor }}</p>
+        <div class="course-meta">
+          <span>{{ course.duration }}</span>
+        </div>
+        <div class="course-progress" *ngIf="course.progress > 0">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="course.progress"></div>
+          </div>
+          <span class="progress-pct">{{ course.progress }}%</span>
+        </div>
+        <button class="course-btn" *ngIf="course.progress === 0" [routerLink]="['/frontoffice/courses', course.id, 'ai']">Start course</button>
+        <button class="course-btn continue" *ngIf="course.progress > 0 && course.progress < 100" [routerLink]="['/frontoffice/courses', course.id, 'ai']">Continue</button>
+        <button class="course-btn done" *ngIf="course.progress === 100" [routerLink]="['/frontoffice/courses', course.id, 'ai']">Completed</button>
+      </div>
+    </div>
+
+    <div *ngIf="filteredCourses.length === 0" class="no-results">
+      No courses found for "{{ searchQuery }}"
+    </div>
+  </div>
+</div>
