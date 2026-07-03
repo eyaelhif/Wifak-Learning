@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Chapter, Course, Lesson } from '../models/course.model';
@@ -75,7 +75,12 @@ export class CourseService {
   analyzeCoursePdf(courseId: number, file: File): Observable<CourseAiAnalysisRecord> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<CourseAiAnalysisRecord>(`${this.courseAiUrl}/course/${courseId}/analyze`, formData);
+    const token = this.authService.getToken();
+    const options = token
+      ? { headers: new HttpHeaders({ Authorization: `Bearer ${token}` }) }
+      : {};
+
+    return this.http.post<CourseAiAnalysisRecord>(`${this.courseAiUrl}/course/${courseId}/analyze`, formData, options);
   }
 
   getCourseAnalysis(courseId: number): Observable<CourseAiAnalysisRecord> {

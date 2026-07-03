@@ -4,6 +4,7 @@ export interface User {
   id: number;
   fullName: string;
   email: string;
+  role?: string;
   active: boolean;
   profils: string[];
   permissions: string[];

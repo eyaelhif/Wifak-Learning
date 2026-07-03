@@ -21,6 +21,8 @@ public class UserResponseDTO {
 
     private String email;
 
+    private String role;
+
     private Boolean active;
 
     private LocalDateTime createdAt;
@@ -48,6 +50,7 @@ public class UserResponseDTO {
                 .id(user.getId())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
+                .role(user.getRole().name())
                 .active(user.getActive())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())

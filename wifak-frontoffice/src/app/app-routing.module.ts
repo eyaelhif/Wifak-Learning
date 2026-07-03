@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
-import { ProfilGuard } from './guards/profil.guard';
 
 import { HomeComponent } from './pages/home/home.component';
 import { CoursesComponent } from './pages/courses/courses.component';
@@ -16,8 +15,7 @@ const routes: Routes = [
   { path: 'access-denied', component: AccessDeniedComponent },
   {
     path: 'frontoffice',
-    canActivate: [AuthGuard, ProfilGuard],
-    data: { profils: ['ETUDIANT', 'TUTEUR', 'ADMIN', 'PROF', 'Prof'] },
+    canActivate: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },

@@ -72,6 +72,7 @@ export class AuthService {
 
   hasBackofficeAccess(): boolean {
     const user = this.getCurrentUser();
+    const role = user?.role?.toUpperCase();
     const profils = (user?.profils || []).map((profil) => profil.toUpperCase());
     const permissions = user?.permissions || [];
 
@@ -85,11 +86,12 @@ export class AuthService {
       'DELETE_QUIZ'
     ];
 
-    return profils.some((profil) => backofficeProfils.includes(profil)) ||
+    return role === 'ADMIN' ||
+      profils.some((profil) => backofficeProfils.includes(profil)) ||
       permissions.some((permission) => backofficePermissions.includes(permission));
   }
 
-  buildFrontofficeSessionUrl(path = 'http://localhost:4300/frontoffice/home'): string {
+  buildFrontofficeSessionUrl(path = 'http://localhost:4200/frontoffice/home'): string {
     const token = this.getToken();
     const user = this.getCurrentUser();
 

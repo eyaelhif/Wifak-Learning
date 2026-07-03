@@ -91,6 +91,8 @@ public class CourseAiAnalysisService {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            HttpHeaders fileHeaders = new HttpHeaders();
+            fileHeaders.setContentType(resolveFileContentType(file));
             ByteArrayResource fileResource = new ByteArrayResource(file.getBytes()) {
                 @Override
                 public String getFilename() {
@@ -98,7 +100,7 @@ public class CourseAiAnalysisService {
                 }
             };
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("file", fileResource);
+            body.add("file", new HttpEntity<>(fileResource, fileHeaders));
             body.add("source_course_id", String.valueOf(courseId));
             body.add("created_by", username == null ? "backoffice" : username);
             ResponseEntity<String> response = restTemplate.exchange(
@@ -113,6 +115,28 @@ public class CourseAiAnalysisService {
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "OCR AI service is unavailable: " + ex.getMessage(), ex);
         }
+    }
+
+    private MediaType resolveFileContentType(MultipartFile file) {
+        String contentType = file.getContentType();
+        if (contentType != null && !contentType.isBlank() && !MediaType.APPLICATION_OCTET_STREAM_VALUE.equals(contentType)) {
+            return MediaType.parseMediaType(contentType);
+        }
+
+        String filename = file.getOriginalFilename();
+        String lowerFilename = filename == null ? "" : filename.toLowerCase();
+
+        if (lowerFilename.endsWith(".pdf")) {
+            return MediaType.APPLICATION_PDF;
+        }
+        if (lowerFilename.endsWith(".jpg") || lowerFilename.endsWith(".jpeg")) {
+            return MediaType.IMAGE_JPEG;
+        }
+        if (lowerFilename.endsWith(".png")) {
+            return MediaType.IMAGE_PNG;
+        }
+
+        return MediaType.APPLICATION_OCTET_STREAM;
     }
 
     private String text(JsonNode node, String field) {

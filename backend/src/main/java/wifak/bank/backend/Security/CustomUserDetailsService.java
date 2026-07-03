@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import wifak.bank.backend.Repositories.UserRepository;
 import wifak.bank.backend.entities.User;
 
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -24,16 +24,20 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Fetch permissions through profils
-        List<SimpleGrantedAuthority> authorities =
-                user.getProfils()
-                        .stream()
-                        .flatMap(profil ->
-                                profil.getPermissions().stream())
-                        .map(permission ->
-                                new SimpleGrantedAuthority(permission.getName()))
-                        .distinct()
-                        .toList();
+        var permissionAuthorities = user.getProfils()
+                .stream()
+                .flatMap(profil -> profil.getPermissions().stream())
+                .map(permission -> new SimpleGrantedAuthority(permission.getName()));
+
+        var authorities = Stream.concat(
+                        Stream.of(
+                                new SimpleGrantedAuthority(user.getRole().name()),
+                                new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
+                        ),
+                        permissionAuthorities
+                )
+                .distinct()
+                .collect(Collectors.toList());
 
         System.out.println("AUTHORITIES = " + authorities);
 

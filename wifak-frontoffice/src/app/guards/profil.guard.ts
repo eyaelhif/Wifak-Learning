@@ -14,7 +14,12 @@ export class ProfilGuard implements CanActivate {
       return true;
     }
 
-    const userProfils = (this.authService.getCurrentUser()?.profils || [])
+    const user = this.authService.getCurrentUser();
+    const userProfils = [
+      ...(user?.profils || []),
+      user?.role
+    ]
+      .filter((profil): profil is string => !!profil)
       .map(profil => profil.toUpperCase());
     const hasAccess = allowedProfils.some(profil => userProfils.includes(profil));
 
