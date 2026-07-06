@@ -17,4 +17,5 @@ class ExtractedDocument:
     raw_text: str
     cleaned_text: str
     language: str
+    improved_text: str | None = None
     created_at: datetime = field(default_factory=datetime.utcnow)

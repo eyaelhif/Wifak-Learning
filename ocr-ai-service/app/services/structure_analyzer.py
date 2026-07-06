@@ -46,6 +46,9 @@ class CourseStructureAnalyzer:
         return max(candidates[:8], key=lambda item: (sum(ch.isupper() for ch in item), -len(item)))
 
     def _is_heading(self, line: str) -> bool:
+        # Si la ligne commence par un marquage Markdown de titre généré par le LLM
+        if line.startswith("# ") or line.startswith("## ") or line.startswith("### "):
+            return True
         if any(pattern.match(line) for pattern in self.HEADING_PATTERNS):
             return True
         words = line.split()
@@ -90,6 +93,9 @@ class CourseStructureAnalyzer:
         return " ".join(sentences[:2])[:600]
 
     def _normalize_heading(self, line: str) -> str:
+        # Nettoyer les marqueurs Markdown
+        if line.startswith("#"):
+            return line.lstrip("# ").strip()
         for pattern in self.HEADING_PATTERNS:
             match = pattern.match(line)
             if match:

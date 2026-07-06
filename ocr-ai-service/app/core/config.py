@@ -32,6 +32,13 @@ class Settings(BaseSettings):
     enable_keybert: bool = False
     enable_vector_index: bool = False
 
+    # ── Ollama (amélioration texte OCR par IA) ──
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_model: str = "llama3.1:8b"
+    ollama_timeout: int = 120
+    enable_ocr_improvement: bool = False
+    ocr_improve_max_chunk: int = 3000
+
     @property
     def max_upload_size_bytes(self) -> int:
         return self.max_upload_size_mb * 1024 * 1024

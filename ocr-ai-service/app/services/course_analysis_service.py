@@ -9,6 +9,7 @@ from app.services.file_service import FileService
 from app.services.flashcard_service import FlashcardGenerator
 from app.services.keyword_service import KeywordService
 from app.services.ocr_service import OCRService
+from app.services.ocr_improver_service import OcrTextImproverService
 from app.services.quiz_service import QuizGenerator
 from app.services.structure_analyzer import CourseStructureAnalyzer
 from app.services.summary_service import SummaryGenerator
@@ -19,6 +20,7 @@ class CourseAnalysisService:
     def __init__(self) -> None:
         self.file_service = FileService()
         self.ocr_service = OCRService()
+        self.ocr_improver = OcrTextImproverService()
         self.structure_analyzer = CourseStructureAnalyzer()
         self.keyword_service = KeywordService()
         self.summary_generator = SummaryGenerator()
@@ -34,16 +36,31 @@ class CourseAnalysisService:
     ) -> CourseAnalysisResponse:
         course_id, file_path = await self.file_service.save_upload(file)
         document = self.ocr_service.extract_document(file_path, file.content_type or "")
-        structure = self.structure_analyzer.analyze(document.cleaned_text)
-        keywords = self.keyword_service.extract(document.cleaned_text)
-        short_summary = self.summary_generator.short_summary(document.cleaned_text)
-        detailed_summary = self.summary_generator.detailed_summary(document.cleaned_text)
+
+        # ── Amélioration du texte OCR par IA (Ollama) ──
+        analysis_text = document.cleaned_text
+        ocr_improved = False
+        if settings.enable_ocr_improvement:
+            logger.info("ocr_improvement_start", course_id=course_id)
+            improved = await self.ocr_improver.improve(document.cleaned_text)
+            if improved and improved != document.cleaned_text:
+                document.improved_text = improved
+                analysis_text = improved
+                ocr_improved = True
+                logger.info("ocr_improvement_applied", course_id=course_id)
+            else:
+                logger.info("ocr_improvement_skipped", course_id=course_id)
+
+        structure = self.structure_analyzer.analyze(analysis_text)
+        keywords = self.keyword_service.extract(analysis_text)
+        short_summary = self.summary_generator.short_summary(analysis_text)
+        detailed_summary = self.summary_generator.detailed_summary(analysis_text)
         flashcards = self.flashcard_generator.generate(
             structure["definitions"],
             structure["important_concepts"],
-            document.cleaned_text,
+            analysis_text,
         )
-        quiz = self.quiz_generator.generate(keywords, structure["important_concepts"], document.cleaned_text)
+        quiz = self.quiz_generator.generate(keywords, structure["important_concepts"], analysis_text)
 
         confidence = self._average_confidence(document.pages)
         vector_indexed = self._index_course_safely(course_id, document.cleaned_text)
@@ -73,6 +90,8 @@ class CourseAnalysisService:
                 "pages": len(document.pages),
                 "ocr_engine": "tesseract",
                 "vector_indexed": vector_indexed,
+                "ocr_improved": ocr_improved,
+                "ocr_improve_model": settings.ollama_model if ocr_improved else None,
             },
             created_at=datetime.utcnow(),
         )
